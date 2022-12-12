@@ -29,7 +29,7 @@ function findMe(posicion) {
        zoom: 12
    });
       
-   new mapboxgl.Marker().setLngLat([longitude, latitude]).addTo(map); // marcador 1
+   new mapboxgl.Marker().setLngLat([longitude, latitude]).addTo(map); //pointer In map
 }
  
 // Verifying that my browser supports geolocation.

@@ -9,6 +9,7 @@ center: [-97.17304579912934, 49.79584745938669], // starting position
 zoom: 12
 });
 
+let marker = new mapboxgl.Marker().setLngLat([-97.17304579912934, 49.79584745938669]).addTo(map); // marcador 1
 
 /*
 function findMe() {

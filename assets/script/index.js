@@ -1,60 +1,56 @@
 'use strict';
+ 
+mapboxgl.accessToken = 'pk.eyJ1Ijoicm9iZXJ0b2FndWlycmUxOTc1IiwiYSI6ImNsYmdycXN1MjBpeWQzdnBkbDFka3pscnYifQ.nUFHQUdp9wIInZZGhJfYjQ';
 
-mapboxgl.accessToken = 'pk.eyJ1IjoiZXZpbG5hcHNpcyIsImEiOiJjazM2MHZtbXcwNm11M25reGY3NW1zMHhhIn0.FoA72lWHT4bXe2jxfH5uvQ';
-
-let map = new mapboxgl.Map({
-container: 'map',
-style: 'mapbox://styles/mapbox/streets-v12',
-center: [-97.17304579912934, 49.79584745938669], // starting position
-zoom: 12
-});
-
-let marker = new mapboxgl.Marker().setLngLat([-97.17304579912934, 49.79584745938669]).addTo(map); // marcador 1
-
-/*
-function findMe() {
-    let output = document.getElementById('map');
-
-    // Verifying that my browser supports geolocation
-    if (navigator.geolocation) {
-        output.innerHTML= "<p>Your Browser Supports Geolocation</p>";
-    } else {
-        output.innerHTML= "<p>Your Browser Does Not Support Geolocation</p>";
-    }
-
-    // Obtenemos Latitud y Longitud
-    function localizacion(posicion){
-        let latitude = posicion.coords.latitude;
-        let longitude = posicion.coords.longitude;
-
-        output.innerHTML = "<p>Latitud: " + latitude + "<br>longitud: " + longitude + "</p>";
-    }
-
-    function error() {
-        output.innerHTML = "<p>Your location could not be obtained </p>";
-    }
-
-    navigator.geolocation.getCurrentPosition(localizacion,error);
+const options = {
+    enableHighAccuracy: true
 }
 
+let elementSupport = document.getElementById('support');
 
-// Include Map
-let map = new mapboxgl.Map({
-    container:'map',
-    style: 'mapbox://styles/mapbox/streets-v12',
-    center:[49.79584745938669, -97.17304579912934],
-    zoom: 9
-});
+function error() {
+    elementSupport.innerHTML = "Your location could not be obtained";
+}
+ 
+function findMe(posicion) {
+   let elementLatitude = document.getElementById('latitude');
+   let elementLongitude = document.getElementById('longitude');
 
-/* const accessToken = 'pk.eyJ1Ijoicm9iZXJ0b2FndWlycmUxOTc1IiwiYSI6ImNsYmwyamE0cTAzZzIzdW13OG9uc2tnZDgifQ.weAKBXx9xj0TFLKklrdZyg';
+   let latitude = posicion.coords.latitude;
+   let longitude = posicion.coords.longitude;
+ 
+   elementLatitude.innerHTML = "Your Latitude: " + latitude;
+   elementLongitude.innerHTML = "Your Longitude: " + longitude;
+ 
+   let map = new mapboxgl.Map({
+       container: 'map',
+       style: 'mapbox://styles/mapbox/streets-v12',
+       center: [longitude, latitude], // starting position
+       zoom: 12
+   });
+      
+   new mapboxgl.Marker().setLngLat([longitude, latitude]).addTo(map); // marcador 1
+}
+ 
+// Verifying that my browser supports geolocation.
 
-const script = document.getElementById('search-js');
+if (navigator.geolocation) {
+    elementSupport.innerHTML = "Your Browser Supports Geolocation";
+    navigator.geolocation.getCurrentPosition(findMe ,error ,options);
+} else {
+    elementSupport.innerHTML = "Your Browser Does Not Support Geolocation";
+}
 
-script.onload = function() {
-    mapboxsearch.autofill({
-    accessToken
-    });
-};
-
-
-*/
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
